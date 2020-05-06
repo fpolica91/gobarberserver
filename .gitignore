@@ -1,0 +1,12 @@
+node_modules/
+.vscode/
+settings.json
+secretnotes.md
+imports/lib/
+public/fonts/
+temp/
+tmp/*
+
+!tmp/.gitkeep
+
+
