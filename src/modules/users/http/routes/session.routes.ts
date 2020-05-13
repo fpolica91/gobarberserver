@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const sessionRouter = Router();
-import SessionService from '../services/CreateSessionService';
+import SessionService from '@modules/users/services/CreateSessionService';
 
 sessionRouter.post('/', async (req, res) => {
   const sessionService = new SessionService();
