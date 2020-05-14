@@ -1,9 +1,9 @@
-import { getRepository } from 'typeorm';
 import User from '../infra/typeorm/entities/User';
 import path from 'path';
 import fs from 'fs';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import IUserRepository from '../repositories/IUserRepository';
 
 interface Request {
   user_id: string;
@@ -18,9 +18,9 @@ interface Request {
  */
 
 export default class UpdateUserAvatarService {
+  constructor(private userRepository: IUserRepository) {}
   public async execute({ user_id, avatarFilename }: Request): Promise<User> {
-    const userRepository = getRepository(User);
-    const user = await userRepository.findOne(user_id);
+    const user = await this.userRepository.findById(user_id);
     if (!user) {
       throw new AppError('Only authenticated users can upload images');
     }
@@ -33,7 +33,7 @@ export default class UpdateUserAvatarService {
       }
     }
     user.avatar = avatarFilename;
-    await userRepository.save(user);
+    await this.userRepository.save(user);
     return user;
   }
 }
