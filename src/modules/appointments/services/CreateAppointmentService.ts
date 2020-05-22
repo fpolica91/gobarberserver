@@ -16,6 +16,7 @@ interface IRequestDTO {
  */
 
 class CreateAppointmentService {
+  // the appointmentRepository we are now using is the one created, iAppointmentRepository.
   constructor(private appointmentRepository: IAppointmentRepository) {}
   public async execute({
     date,

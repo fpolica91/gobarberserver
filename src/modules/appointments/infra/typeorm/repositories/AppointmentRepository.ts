@@ -10,8 +10,15 @@ import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointment
 
 // @EntityRepository(Appointment)
 class AppointmentRepository implements IAppointmentRepository {
+
+  /**
+   * @ormRepository is the typography of the repository we will be creating
+   */
   private ormRepository: Repository<Appointment>;
   constructor() {
+     /**
+   * @getRepository creates an instance of the repository
+   */
     this.ormRepository = getRepository(Appointment);
   }
   public async findByDate(date: Date): Promise<Appointment | undefined> {
