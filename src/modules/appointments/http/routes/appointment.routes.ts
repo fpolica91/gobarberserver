@@ -1,37 +1,14 @@
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-/**
- *  @module imports
- * @relative imports
- */
-import AppointmentRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentRepository';
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+
 import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
+import AppointmentsController from '../controllers/AppointmentsController';
 
 const appointmentRouter = Router();
+const appointmentsController = new AppointmentsController();
 
-/**
- * @ensureAuthenticated requires the jwt on every route of @appointmentRouter
- */
 appointmentRouter.use(ensureAuthenticated);
 
-appointmentRouter.post('/', async (req, res) => {
-  const { provider_id, date } = req.body;
-  const appointmentRepository = new AppointmentRepository();
-  const parsedDate = parseISO(date);
-  /**
-   * @createAppointmentService already has access to database,
-   * @getCustomRepository not needed in this route
-   */
-  const createAppointmentService = new CreateAppointmentService(
-    appointmentRepository
-  );
-  const appointment = await createAppointmentService.execute({
-    date: parsedDate,
-    provider_id
-  });
-  return res.json(appointment);
-});
+appointmentRouter.post('/', appointmentsController.create);
 
 // appointmentRouter.get('/', async (req, res) => {
 //   /** you use the function @getCustomRepository

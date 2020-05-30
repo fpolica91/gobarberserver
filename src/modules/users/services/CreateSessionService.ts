@@ -1,4 +1,5 @@
 import { compare } from 'bcryptjs';
+import { inject, injectable } from 'tsyringe';
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUserRepository from '../repositories/IUserRepository';
 import { sign } from 'jsonwebtoken';
@@ -14,8 +15,12 @@ interface Response {
   token: string;
 }
 
+@injectable()
 export default class SessionService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) {}
   public async execute({ email, password }: Request): Promise<Response> {
     const user = await this.userRepository.findByEmail(email);
     if (!user) {

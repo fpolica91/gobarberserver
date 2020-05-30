@@ -1,4 +1,5 @@
 import User from '../infra/typeorm/entities/User';
+import { inject, injectable } from 'tsyringe';
 import path from 'path';
 import fs from 'fs';
 import uploadConfig from '@config/upload';
@@ -16,9 +17,12 @@ interface Request {
  * @user has an avatar delete current
  *
  */
-
+@injectable()
 export default class UpdateUserAvatarService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) {}
   public async execute({ user_id, avatarFilename }: Request): Promise<User> {
     const user = await this.userRepository.findById(user_id);
     if (!user) {
