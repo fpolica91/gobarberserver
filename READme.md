@@ -1,14 +1,16 @@
-#Node TypeScript Server
+# forgot password
 
-##Installation
-1.Clone repo
-2.run yarn to install dependencies
+**RF**
+functional rules
 
-##Usage
-1.yarn dev:server
+**RNF**
+non-functioning rules
 
-##Important
+**RN**
+business rules
 
-1. transpileOnly -> ignores typechecking, only concerns with transpiling
-2. repository handles logic and data transfer object
-3. Services handles business rules
+# update profile
+
+# list appointments
+
+# schedule appointment
