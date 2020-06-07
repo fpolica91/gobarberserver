@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,12 +100,13 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -120,36 +121,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import User from '../infra/typeorm/entities/User';
-<span class="cstat-no" title="statement not covered" >import { inject, injectable } from 'tsyringe';</span>
-<span class="cstat-no" title="statement not covered" >import path from 'path';</span>
-<span class="cstat-no" title="statement not covered" >import fs from 'fs';</span>
-<span class="cstat-no" title="statement not covered" >import uploadConfig from '@config/upload';</span>
-<span class="cstat-no" title="statement not covered" >import AppError from '@shared/errors/AppError';</span>
+import { inject, injectable } from 'tsyringe';
+import path from 'path';
+import fs from 'fs';
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
 import IUserRepository from '../repositories/IUserRepository';
+import IStorageProvider from '@shared/container/providers/StorageProviders/models/IStorageProvider';
 &nbsp;
 interface Request {
   user_id: string;
@@ -163,29 +166,29 @@ interface Request {
  *
  */
 @injectable()
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export default class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >U</span></span>pdateUserAvatarService {</span></span>
-<span class="fstat-no" title="function not covered" >  constructor(</span>
+export default class UpdateUserAvatarService {
+  constructor(
     @inject('UserRepository')
-    private <span class="cstat-no" title="statement not covered" >userRepository: IUserRepository</span>
+    private userRepository: IUserRepository,
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider
   ) {}
-<span class="fstat-no" title="function not covered" >  public async <span class="cstat-no" title="statement not covered" >e</span>xecute({ <span class="cstat-no" title="statement not covered" >user_id,</span> <span class="cstat-no" title="statement not covered" >avatarFilename </span>}: Request): Promise&lt;User&gt; {</span>
-    const <span class="cstat-no" title="statement not covered" >user = <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >await this.userRepository.findById(user_id);</span></span></span>
-<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('Only authenticated users can upload images');</span>
+  public async execute({ user_id, avatarFilename }: Request): Promise&lt;User&gt; {
+    const user = await this.userRepository.findById(user_id);
+    if (!user) {
+      throw new AppError('Only authenticated users can upload images');
     }
-    if (<span class="cstat-no" title="statement not covered" >user.</span>avatar) {
-      const <span class="cstat-no" title="statement not covered" >userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);</span>
-      const <span class="cstat-no" title="statement not covered" >userAvatarFileExists = <span class="cstat-no" title="statement not covered" >await fs.promises.stat(userAvatarFilePath);</span></span>
-      if (<span class="cstat-no" title="statement not covered" >userAvatarFileExists)</span> {
-        /**Asynchronous unlink(2) - @delete a name and possibly the file it refers to. */
-<span class="cstat-no" title="statement not covered" >        await fs.promises.unlink(userAvatarFilePath);</span>
-      }
+&nbsp;
+    if (user.avatar) {
+      await this.storageProvider.deleteFile(user.avatar);
     }
-<span class="cstat-no" title="statement not covered" >    user.avatar = avatarFilename;</span>
-<span class="cstat-no" title="statement not covered" >    await this.userRepository.save(user);</span>
-<span class="cstat-no" title="statement not covered" >    return user;</span>
+    const filename = await this.storageProvider.saveFile(avatarFilename);
+&nbsp;
+    user.avatar = filename;
+    await this.userRepository.save(user);
+    return user;
   }
-<span class="cstat-no" title="statement not covered" >}</span>
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -193,7 +196,7 @@ interface Request {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun May 31 2020 21:46:21 GMT-0400 (Eastern Daylight Time)
+                at Sun Jun 07 2020 19:21:06 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
