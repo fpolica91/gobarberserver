@@ -18,5 +18,7 @@ export default class SendForgotPasswordEmail {
     @inject('MailProvider')
     private mailProvider: IMailProvider
   ) {}
-  public async execute({}: IRequest): Promise<void> {}
+  public async execute({ email }: IRequest): Promise<void> {
+    this.mailProvider.sendMail(email, 'Recovery of email');
+  }
 }
