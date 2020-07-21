@@ -12,5 +12,6 @@ profileRoutes.use(ensureAuthenticated);
 const profileController = new ProfileController();
 
 profileRoutes.put('/update', profileController.update);
+profileRoutes.get('/show', profileController.show);
 
 export default profileRoutes;

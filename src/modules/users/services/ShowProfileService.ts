@@ -7,7 +7,7 @@ interface Request {
   user_id: string;
 }
 @injectable()
-export default class UpdateProfileService {
+export default class ShowProfileService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository
