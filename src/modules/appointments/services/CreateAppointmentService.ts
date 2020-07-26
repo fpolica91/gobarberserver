@@ -1,9 +1,10 @@
 import 'reflect-metadata';
-import { startOfHour, isBefore } from 'date-fns';
+import { startOfHour, isBefore, getHours } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentRepository from '../repositories/IAppointmentRepository';
 import AppError from '@shared/errors/AppError';
+import { isFunction } from 'util';
 
 interface IRequestDTO {
   provider_id: string;
@@ -37,6 +38,12 @@ class CreateAppointmentService {
 
     if (user_id === provider_id) {
       throw new AppError('You cannot create an appointment with yourself');
+    }
+
+    if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
+      throw new AppError(
+        'You can only book appointments during operating hours'
+      );
     }
 
     const booked = await this.appointmentRepository.findByDate(appointmentDate);
