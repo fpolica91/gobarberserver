@@ -7,8 +7,13 @@ describe('CreateAppointment', () => {
     const createAppointmentService = new CreateAppointmentService(
       fakeAppointmentRepository
     );
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 4, 1, 12).getTime();
+    });
+
     const appointment = await createAppointmentService.execute({
-      date: new Date(),
+      date: new Date(2020, 4, 10, 13),
       provider_id: '123123',
       user_id: '1122'
     });
@@ -51,6 +56,6 @@ describe('CreateAppointment', () => {
         user_id: '112233',
         provider_id: '112244'
       })
-    );
+    ).rejects.toBeInstanceOf(Error);
   });
 });

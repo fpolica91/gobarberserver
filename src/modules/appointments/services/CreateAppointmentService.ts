@@ -35,6 +35,10 @@ class CreateAppointmentService {
       throw new AppError('you cannot schedule an appointment on a past date');
     }
 
+    if (user_id === provider_id) {
+      throw new AppError('You cannot create an appointment with yourself');
+    }
+
     const booked = await this.appointmentRepository.findByDate(appointmentDate);
     if (booked) {
       throw new AppError('this appointment is already booked');
