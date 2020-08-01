@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { startOfHour } from 'date-fns';
+import { startOfHour, isBefore } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentRepository from '../repositories/IAppointmentRepository';
@@ -30,6 +30,11 @@ class CreateAppointmentService {
     user_id
   }: IRequestDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
+
+    if (isBefore(appointmentDate, Date.now())) {
+      throw new AppError('you cannot schedule an appointment on a past date');
+    }
+
     const booked = await this.appointmentRepository.findByDate(appointmentDate);
     if (booked) {
       throw new AppError('this appointment is already booked');

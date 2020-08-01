@@ -36,4 +36,21 @@ describe('CreateAppointment', () => {
       })
     ).rejects.toBeInstanceOf(Error);
   });
+
+  it('should not be able to create an appointment on a past date', async () => {
+    const fakeAppointmentRepository = new FakeAppointmentRepository();
+    const createAppointmentService = new CreateAppointmentService(
+      fakeAppointmentRepository
+    );
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() => new Date(2020, 4, 10, 12).getTime());
+    await expect(
+      createAppointmentService.execute({
+        date: new Date(2020, 4, 10, 10),
+        user_id: '112233',
+        provider_id: '112244'
+      })
+    );
+  });
 });
