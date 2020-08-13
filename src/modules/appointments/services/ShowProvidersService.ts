@@ -1,8 +1,6 @@
 import User from '@modules/users/infra/typeorm/entities/User';
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
-import IFindProvidersDTO from '../../users/dtos/IFindProvidersdto';
 
 @injectable()
 export default class ShowProviderService {

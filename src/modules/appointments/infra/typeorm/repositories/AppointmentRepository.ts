@@ -1,7 +1,8 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Raw } from 'typeorm';
 import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentRepository';
 import Appointment from '../entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
+import IFindAllInMonthFromProvider from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 
 /**
  * @liskov substituion principle
@@ -10,15 +11,14 @@ import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointment
 
 // @EntityRepository(Appointment)
 class AppointmentRepository implements IAppointmentRepository {
-
   /**
    * @ormRepository is the typography of the repository we will be creating
    */
   private ormRepository: Repository<Appointment>;
   constructor() {
-     /**
-   * @getRepository creates an instance of the repository
-   */
+    /**
+     * @getRepository creates an instance of the repository
+     */
     this.ormRepository = getRepository(Appointment);
   }
   public async findByDate(date: Date): Promise<Appointment | undefined> {
@@ -34,6 +34,25 @@ class AppointmentRepository implements IAppointmentRepository {
     const appointment = this.ormRepository.create({ provider_id, date });
     await this.ormRepository.save(appointment);
     return appointment;
+  }
+
+  public async findByMonthFromProvider({
+    user_id,
+    month,
+    year
+  }: IFindAllInMonthFromProvider): Promise<Appointment[]> {
+    const parsedMonth = String(month).padStart(2, '0');
+    const appointments = this.ormRepository.find({
+      where: {
+        provider_id: user_id,
+        date: Raw(
+          dateFieldName =>
+            `to_char(${dateFieldName},'MM-YYYY') = '${parsedMonth}-${year}' `
+        )
+      }
+    });
+
+    return appointments;
   }
 }
 

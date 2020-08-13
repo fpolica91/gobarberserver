@@ -1,4 +1,3 @@
-import FakeHashProvider from '../providers/HashProvider/fakes/fakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import AppError from '../../../shared/errors/AppError';
 import ShowProfileService from './ShowProfileService';
