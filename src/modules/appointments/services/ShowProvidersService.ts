@@ -12,11 +12,17 @@ export default class ShowProviderService {
     private cacheProvider: ICacheProvider
   ) { }
   public async execute(user_id: string): Promise<User[]> {
-    const users = await this.userRepository.findAllProviders({
-      except_user_id: user_id
-    });
+    // check for cached users first
+    let users = await this.cacheProvider.recover<User[]>(`providers-list:${user_id}`)
+    //if not cache users run db query
+    if (!users) {
+      users = await this.userRepository.findAllProviders({
+        except_user_id: user_id
+      });
+    }
 
-    await this.cacheProvider.save(`providers-list:${user_id}`, JSON.stringify(users))
+    // save users to redis
+    await this.cacheProvider.save(`providers-list:${user_id}`, users)
 
     return users;
   }
