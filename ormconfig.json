@@ -1,4 +1,6 @@
-{
+[
+  {
+  "name":"default",
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
@@ -11,4 +13,15 @@
     "migrationsDir": "./src/shared/infra/typeorm/migrations"
   },
   "logging": true
+},
+{
+  "name": "mongo",
+  "type": "mongodb",
+  "host": "localhost",
+  "port": 27017,
+  "database": "gobarber",
+  "useUnifiedTopology": true,
+  "entities": ["./src/modules/**/infra/typeorm/schemas/*.ts"]
 }
+
+]
