@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { startOfHour, isBefore, getHours } from 'date-fns';
+import { startOfHour, isBefore, getHours, format } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentRepository from '../repositories/IAppointmentRepository';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository'
 import AppError from '@shared/errors/AppError';
-import { isFunction } from 'util';
 
 interface IRequestDTO {
   provider_id: string;
@@ -12,19 +12,15 @@ interface IRequestDTO {
   user_id: string;
 }
 
-/**
- * Dependecy Inversion(SOLID)
- * Each service has one responsibility
- * this particular service imports the created AppointmentRepository
- * using the method getCustomRepository from typeorm we can use it.
- */
+
 @injectable()
 class CreateAppointmentService {
-  // the appointmentRepository we are now using is the one created, iAppointmentRepository.
   constructor(
     @inject('AppointmentRepository')
-    private appointmentRepository: IAppointmentRepository
-  ) {}
+    private appointmentRepository: IAppointmentRepository,
+    @inject('AppointmentRepository')
+    private notificationsRepository: INotificationsRepository
+  ) { }
   public async execute({
     date,
     provider_id,
@@ -55,6 +51,14 @@ class CreateAppointmentService {
       date: appointmentDate,
       user_id
     });
+
+    const formattedDate = format(appointmentDate, "dd/MM/yyyy 'at' HH:mm")
+
+    await this.notificationsRepository.create({
+      recipient_id: provider_id,
+      content: `New Appointment on ${formattedDate}`
+    })
+
     return appointment;
   }
 }
