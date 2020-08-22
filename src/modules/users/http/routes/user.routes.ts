@@ -10,7 +10,7 @@ import UsersController from '../controllers/UsersController';
  *
  */
 
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 const userController = new UsersController();
 
 userRouter.post('/', userController.create);

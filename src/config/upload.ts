@@ -1,6 +1,6 @@
 import path from 'path';
 import crypto from 'crypto';
-import multer from 'multer';
+import multer, { StorageEngine } from 'multer';
 
 /**
  * @destination __dirname provides access to our files
@@ -15,17 +15,36 @@ import multer from 'multer';
 
 const tempFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
+interface IUploadConfig {
+  driver: 's3' | 'disk',
+  tempFolder: string;
+  uploadsFolder: string;
+  multer: {
+    storage: StorageEngine
+  }
+  config: {
+    disk: {}
+  }
+}
+
+
 export default {
+  driver: process.env.STORAGE_DRIVER,
   tempFolder,
   uploadsFolder: path.resolve(tempFolder, 'uploads'),
-
   directory: path.resolve(__dirname, '..', '..', 'tmp'),
-  storage: multer.diskStorage({
-    destination: tempFolder,
-    filename(request, file, callback) {
-      const fileHash = crypto.randomBytes(10).toString('hex');
-      const fileName = `${fileHash}-${file.originalname}`;
-      return callback(null, fileName);
-    }
-  })
-};
+  multer: {
+    storage: multer.diskStorage({
+      destination: tempFolder,
+      filename(request, file, callback) {
+        const fileHash = crypto.randomBytes(10).toString('hex');
+        const fileName = `${fileHash}-${file.originalname}`;
+        return callback(null, fileName);
+      }
+    })
+  },
+  config: {
+    disk: {}
+  }
+
+} as IUploadConfig
