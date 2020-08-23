@@ -5,6 +5,7 @@ import DiskStorageProvider from './StorageProviders/implementations/DiskStorageP
 import S3StorageProvider from './StorageProviders/implementations/S3StorageProvider'
 import './MailTemplateProvider'
 import './MailProvider'
+import './Cache'
 
 const providers = {
   s3: S3StorageProvider,
