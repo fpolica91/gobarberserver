@@ -5,15 +5,15 @@ import ListProviderDayAvailability from '../../services/ListProviderDayAvailabil
 
 export default class ProviderDailyAvailabilityController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { month, year, day } = request.body;
+    const { month, year, day } = request.query;
     const listProviderDailyAvailability = container.resolve(
       ListProviderDayAvailability
     );
     const availabilty = await listProviderDailyAvailability.execute({
       user_id: request.params.id,
-      day,
-      month,
-      year
+      day: Number(day),
+      month: Number(month),
+      year: Number(year)
     });
 
     return response.json(availabilty);

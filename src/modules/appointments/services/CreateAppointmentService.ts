@@ -42,15 +42,22 @@ class CreateAppointmentService {
       );
     }
 
-    const booked = await this.appointmentRepository.findByDate(appointmentDate);
+
+
+    const booked = await this.appointmentRepository.findByDate(appointmentDate, provider_id);
     if (booked) {
       throw new AppError('this appointment is already booked');
     }
+
+    if (!appointmentDate) {
+      throw new Error('appointment date is required')
+    }
     const appointment = this.appointmentRepository.create({
       provider_id,
+      user_id,
       date: appointmentDate,
-      user_id
     });
+
 
     const formattedDate = format(appointmentDate, "dd/MM/yyyy 'at' HH:mm")
 
@@ -58,6 +65,8 @@ class CreateAppointmentService {
       recipient_id: provider_id,
       content: `New Appointment on ${formattedDate}`
     })
+
+
 
     return appointment;
   }

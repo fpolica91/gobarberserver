@@ -17,7 +17,7 @@ export default class ListProvidersAppointmentService {
   constructor(
     @inject('AppointmentRepository')
     private appointmentRepository: IAppointmentRepository
-  ) {}
+  ) { }
   public async execute({
     user_id,
     month,

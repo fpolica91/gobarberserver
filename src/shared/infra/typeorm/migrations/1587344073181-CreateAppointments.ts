@@ -22,7 +22,6 @@ export default class CreateAppointments1587344073181
           {
             name: 'date',
             type: 'timestamp with time zone',
-            isNullable: false
           },
           {
             name: 'created_at',

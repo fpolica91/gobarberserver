@@ -11,12 +11,7 @@ const listProvidersAppointmentController = new ListProvidersAppointmentControlle
 
 appointmentRouter.use(ensureAuthenticated);
 
-appointmentRouter.post('/', celebrate({
-  [Segments.BODY]: {
-    provider_id: Joi.string().uuid().required(),
-    date: Joi.date()
-  }
-}), appointmentsController.create);
+appointmentRouter.post('/', appointmentsController.create);
 //appointments for logged provider
 appointmentRouter.get('/me', listProvidersAppointmentController.index);
 

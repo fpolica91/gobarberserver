@@ -4,6 +4,7 @@ settings.json
 secretnotes.md
 imports/lib/
 public/fonts/
+.env
 temp/
 tmp/*
 

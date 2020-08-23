@@ -41,9 +41,10 @@ class FakeAppointmentRepository implements IAppointmentRepository {
     return appointments;
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
+  public async findByDate(date: Date, provider_id: string): Promise<Appointment | undefined> {
     const appointment = this.appointments.find(appt =>
-      isEqual(appt.date, date)
+      isEqual(appt.date, date) &&
+      appt.provider.id === provider_id
     );
     return appointment;
   }
