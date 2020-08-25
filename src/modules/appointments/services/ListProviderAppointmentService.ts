@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentRepository';
 import Appointment from '../infra/typeorm/entities/Appointment';
+import ICacheProvider from '@shared/container/providers/Cache/models/ICacheProvider';
 
 interface IRequest {
   user_id: string;
@@ -14,9 +15,12 @@ interface IRequest {
 
 @injectable()
 export default class ListProvidersAppointmentService {
+
   constructor(
     @inject('AppointmentRepository')
-    private appointmentRepository: IAppointmentRepository
+    private appointmentRepository: IAppointmentRepository,
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider
   ) { }
   public async execute({
     user_id,
@@ -24,6 +28,8 @@ export default class ListProvidersAppointmentService {
     year,
     day
   }: IRequest): Promise<Appointment[]> {
+    const cacheData = await this.cacheProvider.recover('asd')
+    console.log(cacheData)
     const appointments = await this.appointmentRepository.findByDayFromProvider(
       {
         user_id,
@@ -32,6 +38,7 @@ export default class ListProvidersAppointmentService {
         day
       }
     );
+    // await this.cacheProvider.save('assds', 'dagaga')
     return appointments;
   }
 }
