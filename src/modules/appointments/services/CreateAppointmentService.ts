@@ -4,6 +4,7 @@ import { injectable, inject } from 'tsyringe';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentRepository from '../repositories/IAppointmentRepository';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository'
+import ICacheProvider from '@shared/container/providers/Cache/models/ICacheProvider';
 import AppError from '@shared/errors/AppError';
 
 interface IRequestDTO {
@@ -18,8 +19,10 @@ class CreateAppointmentService {
   constructor(
     @inject('AppointmentRepository')
     private appointmentRepository: IAppointmentRepository,
-    @inject('AppointmentRepository')
-    private notificationsRepository: INotificationsRepository
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository,
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider
   ) { }
   public async execute({
     date,
@@ -52,14 +55,16 @@ class CreateAppointmentService {
     if (!appointmentDate) {
       throw new Error('appointment date is required')
     }
-    const appointment = this.appointmentRepository.create({
+    const appointment = await this.appointmentRepository.create({
       provider_id,
       user_id,
       date: appointmentDate,
     });
 
-
     const formattedDate = format(appointmentDate, "dd/MM/yyyy 'at' HH:mm")
+
+    await this.cacheProvider.invalidate(`provider-appointments:${provider_id}:${format(appointmentDate, 'yyyy-M-d')}`)
+
 
     await this.notificationsRepository.create({
       recipient_id: provider_id,
