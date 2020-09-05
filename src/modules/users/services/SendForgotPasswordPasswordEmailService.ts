@@ -19,7 +19,7 @@ export default class SendForgotPasswordEmail {
 
     @inject('UserTokensRepository')
     private userTokenRepository: IUserTokensRepository
-  ) {}
+  ) { }
   public async execute({ email }: IRequest): Promise<void> {
     const forgotPasswordTemplate = path.resolve(
       __dirname,
@@ -40,7 +40,7 @@ export default class SendForgotPasswordEmail {
         file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          link: `hhtp://localhost:3000/reset?token=${token}`
+          link: `http://localhost:3000/reset?token=${token}`
         }
       }
     });

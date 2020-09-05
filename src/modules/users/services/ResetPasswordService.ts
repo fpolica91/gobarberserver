@@ -18,9 +18,10 @@ export default class ResetPasswordService {
     private userTokenRepository: IUserTokensRepository,
     @inject('HashProvider')
     private hashProvider: IHashProvider
-  ) {}
+  ) { }
 
   public async execute({ password, token }: IRequest): Promise<void> {
+    console.log(token, 'the token')
     const userToken = await this.userTokenRepository.findByToken(token);
     if (!userToken) throw new Error('User token does not exist');
 
