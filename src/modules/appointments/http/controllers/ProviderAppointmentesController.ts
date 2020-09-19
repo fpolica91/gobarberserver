@@ -7,12 +7,12 @@ export default class ListProvidersAppointmentController {
     const listProvidersAppointmentService = container.resolve(
       ListProvidersAppointmentService
     );
-    const { day, month, year } = request.body;
+    const { day, month, year } = request.query;
     const appointments = await listProvidersAppointmentService.execute({
       user_id: request.user.id,
-      day,
-      month,
-      year
+      day: Number(day),
+      month: Number(month),
+      year: Number(year)
     });
     return response.json(appointments);
   }

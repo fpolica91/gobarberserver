@@ -24,6 +24,7 @@ export default class UpdateUserAvatarService {
     private storageProvider: IStorageProvider
   ) {}
   public async execute({ user_id, avatarFilename }: Request): Promise<User> {
+    console.log(avatarFilename, 'the avatar file name');
     const user = await this.userRepository.findById(user_id);
     if (!user) {
       throw new AppError('Only authenticated users can upload images');
